@@ -2,6 +2,11 @@
 History
 =======
 
+3.0.4 (2024-11-24)
+------------------
+* Update mininum requirement for Chartify to avoid cropping bug in `chrome-webdriver`
+
+
 3.0.4 (2023-10-12)
 ------------------
 * Fixing so that other multiple correction methods than Bonferroni are applied correctly.
