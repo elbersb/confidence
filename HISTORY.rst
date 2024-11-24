@@ -2,7 +2,7 @@
 History
 =======
 
-3.0.4 (2024-11-24)
+3.0.5 (2024-11-24)
 ------------------
 * Update mininum requirement for Chartify to avoid cropping bug in `chrome-webdriver`
 
