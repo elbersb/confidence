@@ -2,9 +2,10 @@
 History
 =======
 
-3.0.5 (2024-11-24)
+4.0.0 (2024-11-24)
 ------------------
 * Update mininum requirement for Chartify to avoid cropping bug in `chrome-webdriver`
+* Deprecating support for python 3.8
 
 
 3.0.4 (2023-10-12)
