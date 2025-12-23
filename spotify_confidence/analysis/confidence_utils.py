@@ -98,7 +98,9 @@ def get_all_categorical_group_columns(
 def validate_levels(df: DataFrame, level_columns: Union[str, Iterable], levels: Iterable):
     for level in levels:
         try:
-            df.groupby(level_columns).get_group(level)
+            # When grouping with a length-1 list, get_group expects a tuple
+            group_key = (level,) if isinstance(level_columns, list) and len(level_columns) == 1 else level
+            df.groupby(level_columns).get_group(group_key)
         except (KeyError, ValueError):
             raise ValueError(
                 """

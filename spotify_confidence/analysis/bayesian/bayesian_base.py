@@ -447,7 +447,9 @@ class BaseTest(object, metaclass=ABCMeta):
     @staticmethod
     def _validate_levels(level_df, remaining_groups, level):
         try:
-            level_df.groupby(remaining_groups).get_group(level)
+            # When grouping with a length-1 list, get_group expects a tuple
+            group_key = (level,) if isinstance(remaining_groups, list) and len(remaining_groups) == 1 else level
+            level_df.groupby(remaining_groups).get_group(group_key)
         except (KeyError, ValueError):
             raise ValueError(
                 """
