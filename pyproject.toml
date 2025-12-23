@@ -1,6 +1,68 @@
 [build-system]
-requires = [
-    "setuptools>=42",
-    "wheel",
-]
+requires = ["setuptools>=61.2"]
 build-backend = "setuptools.build_meta"
+
+[project]
+name = "spotify-confidence"
+version = "4.0.0"
+description = "Package for calculating and visualising confidence intervals, e.g. for A/B test analysis."
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Per Sillren", email = "pers@spotify.com"}]
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "numpy>=1.20.0,<3.0.0",
+    "scipy>=1.6.0",
+    "pandas>=1.2.0",
+    "statsmodels>=0.13.0,<1.0.0",
+    "chartify>=5.0.1",
+    "ipywidgets>=8.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "build",
+    "twine",
+    "flake8>=4.0.1",
+    "tox>=4.4.7",
+    "pytest>=7.0.1",
+    "pytest-cov>=2.5.1",
+    "pytest-runner>=6.0.0",
+    "coverage>=4.5.1",
+    "black>=23.1.0",
+    "pylint>=1.7.4",
+    "jupyterlab>=3.2.9",
+]
+
+[project.urls]
+Homepage = "https://github.com/spotify/confidence"
+"Bug Tracker" = "https://github.com/spotify/confidence/issues"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["spotify_confidence*"]
+namespaces = false
+
+[tool.black]
+line-length = 119
+target-version = ["py39", "py310", "py311"]
+
+[tool.flake8]
+max-line-length = 120
+ignore = ["E203", "E231", "W503"]
+exclude = [".venv", ".tox", ".git", "dist", "docs", "*.egg", "build", "scratch.py", "confidence_dev"]
+
+[tool.pytest.ini_options]
+addopts = "-v --cov=spotify_confidence --cov-report=html --cov-report=xml --cov-report=term-missing"
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["spotify_confidence"]
+
+[tool.coverage.report]
+show_missing = true
