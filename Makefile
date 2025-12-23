@@ -47,6 +47,9 @@ clean-test: ## remove test and coverage artifacts
 	rm -f .coverage
 	rm -fr htmlcov/
 
+format: ## format code with black
+	black spotify_confidence tests --line-length 119
+
 lint: ## check style with flake8
 	flake8 spotify_confidence tests
 
@@ -91,5 +94,3 @@ install-test: clean
 install-prod: clean
 	pip3 install spotify-confidence
 
-black:
-	black spotify_confidence tests --line-length 119
