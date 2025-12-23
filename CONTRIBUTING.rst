@@ -95,7 +95,7 @@ Ready to contribute? Here's how to set up `confidence` for local development.
 
    To test across all supported Python versions (3.9, 3.10, 3.11, 3.12)::
 
-    $ uv run tox
+    $ uv run tox -p auto
 
    Note: tox requires all Python versions to be installed on your system.
 
