@@ -186,16 +186,8 @@ class BetaBinomial(BaseTest):
         return ch
 
     def _difference_posteriors(self, data, level_1, level_2, absolute=True, remaining_groups=None):
-        # When grouping with a length-1 list, get_group expects a tuple
-        if isinstance(remaining_groups, list) and len(remaining_groups) == 1:
-            level_1_key = (level_1,)
-            level_2_key = (level_2,)
-        else:
-            level_1_key = level_1
-            level_2_key = level_2
-
-        posterior_1 = self._sample_posterior(data.get_group(level_1_key))
-        posterior_2 = self._sample_posterior(data.get_group(level_2_key))
+        posterior_1 = self._sample_posterior(data.get_group(level_1))
+        posterior_2 = self._sample_posterior(data.get_group(level_2))
 
         if absolute:
             difference_posterior = posterior_2 - posterior_1
@@ -392,11 +384,7 @@ class BetaBinomial(BaseTest):
 
         self._validate_levels(level_df, remaining_groups, level)
 
-        # When grouping with a length-1 list, get_group expects a tuple
-        if isinstance(remaining_groups, list) and len(remaining_groups) == 1:
-            posteriors = [self._sample_posterior(grouped_df.get_group((lvl,))) for lvl in grouped_df_keys]
-        else:
-            posteriors = [self._sample_posterior(grouped_df.get_group(lvl)) for lvl in grouped_df_keys]
+        posteriors = [self._sample_posterior(grouped_df.get_group(lvl)) for lvl in grouped_df_keys]
 
         var_indx = grouped_df_keys.index(level)
         other_indx = [i for i, value in enumerate(grouped_df_keys) if value != level]
@@ -639,11 +627,7 @@ class BetaBinomial(BaseTest):
 
         self._validate_levels(level_df, remaining_groups, level)
 
-        # When grouping with a length-1 list, get_group expects a tuple
-        if isinstance(remaining_groups, list) and len(remaining_groups) == 1:
-            posteriors = [self._sample_posterior(grouped_df.get_group((lvl,))) for lvl in grouped_df_keys]
-        else:
-            posteriors = [self._sample_posterior(grouped_df.get_group(lvl)) for lvl in grouped_df_keys]
+        posteriors = [self._sample_posterior(grouped_df.get_group(lvl)) for lvl in grouped_df_keys]
 
         var_indx = grouped_df_keys.index(level)
 
