@@ -185,7 +185,7 @@ class BetaBinomial(BaseTest):
             ch.set_legend_location("outside_bottom")
         return ch
 
-    def _difference_posteriors(self, data, level_1, level_2, absolute=True, remaining_groups=None):
+    def _difference_posteriors(self, data, level_1, level_2, absolute=True):
         posterior_1 = self._sample_posterior(data.get_group(level_1))
         posterior_2 = self._sample_posterior(data.get_group(level_2))
 
@@ -256,7 +256,7 @@ class BetaBinomial(BaseTest):
         self._validate_levels(level_df, remaining_groups, level_2)
         # difference is posterior_2 - posterior_1
         difference_posterior = self._difference_posteriors(
-            level_df.groupby(remaining_groups), level_1, level_2, absolute, remaining_groups
+            level_df.groupby(remaining_groups), level_1, level_2, absolute
         )
         difference_df = self._differences(difference_posterior, level_1, level_2, absolute)
         return difference_df, difference_posterior
@@ -384,7 +384,7 @@ class BetaBinomial(BaseTest):
 
         self._validate_levels(level_df, remaining_groups, level)
 
-        posteriors = [self._sample_posterior(grouped_df.get_group(lvl)) for lvl in grouped_df_keys]
+        posteriors = [self._sample_posterior(grouped_df.get_group(level)) for level in grouped_df_keys]
 
         var_indx = grouped_df_keys.index(level)
         other_indx = [i for i, value in enumerate(grouped_df_keys) if value != level]
@@ -627,7 +627,7 @@ class BetaBinomial(BaseTest):
 
         self._validate_levels(level_df, remaining_groups, level)
 
-        posteriors = [self._sample_posterior(grouped_df.get_group(lvl)) for lvl in grouped_df_keys]
+        posteriors = [self._sample_posterior(grouped_df.get_group(level)) for level in grouped_df_keys]
 
         var_indx = grouped_df_keys.index(level)
 
